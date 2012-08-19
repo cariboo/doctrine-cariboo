@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Use this configuration file as a template to run the tests against any dbms.
+    Procedure:
+        1) Save a copy of this file with a name of your chosing. It doesn't matter
+           where you place it as long as you know where it is.
+           i.e. "mysqlconf.xml" (It needs the ending .xml).
+        2) Edit the file and fill in your settings (database name, type, username, etc.)
+           Just change the "value"s, not the names of the var elements.
+        3) To run the tests against the database type the following from within the
+           tests/ folder: phpunit -c <filename> ...
+           Example: phpunit -c mysqlconf.xml AllTests
+-->
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false"
+         syntaxCheck="false"
+         bootstrap="./tests/Doctrine/Cariboo/Tests/TestInit.php"
+>
+
+    <testsuites>
+        <testsuite name="Doctrine ORM Test Suite">
+            <directory>./tests/Doctrine/Cariboo/Tests/ORM</directory>
+        </testsuite>
+    </testsuites>
+
+    <groups>
+        <exclude>
+            <group>performance</group>
+            <group>locking_functional</group>
+        </exclude>
+    </groups>
+
+  <php>
+    <!-- Test Database -->
+    <var name="tmpdb_type" value="pdo_pgsql"/>
+    <var name="tmpdb_host" value="data2.cariboo-networks.com" />
+    <var name="tmpdb_username" value="dbclient" />
+    <var name="tmpdb_password" value="malou1lalied" />
+    <var name="tmpdb_name" value="baby_test" />
+    <var name="tmpdb_port" value="5433"/>
+  </php>
+
+</phpunit>
